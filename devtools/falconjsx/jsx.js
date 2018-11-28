@@ -1,4 +1,4 @@
-export default function falcon_transform_jsx(jsxo){
+module.export = _jsx = (jsxo) =>{
     let type = jsxo.elementName 
     let props = jsxo.attributes
     let children = jsxo.children

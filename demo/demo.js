@@ -1,12 +1,13 @@
-import {patch, h, thunk} from '../src'
+import {patch, h} from '../src'
+
 const dom = document.getElementById('root');
+
 let onClick = () =>{
     let counter = new Date().getSeconds()
     style= {
       fontSize: counter
     }
     let clickcounter =  <p id="target" class='blue' onclick={onClick} style={style}>Hello Loco!</p>
-    thunk(dom,'target',clickcounter)
 }
 
 let style = {

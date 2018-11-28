@@ -85,7 +85,7 @@ let diff = (node1, node2) => {
          node1.type !== node2.type
 }
 
-function updateAttr($target, name, newVal, oldVal) {
+let updateAttr = ($target, name, newVal, oldVal) => {
     if (!newVal) {
       removeAttr($target, name, oldVal)
     } else if (!oldVal || newVal !== oldVal) {
@@ -93,15 +93,14 @@ function updateAttr($target, name, newVal, oldVal) {
     }
 }
 
-function updateAttrs($target, newProps, oldProps = {}) {
+let updateAttrs = ($target, newProps, oldProps = {}) => {
     const props = Object.assign({}, newProps, oldProps);
     Object.keys(props).forEach(name => {
       updateAttr($target, name, newProps[name], oldProps[name]);
     });
   }
 
-function patch($parent,newNode, oldNode, index = 0) {
-  console.log(diff(newNode, oldNode))
+let patch = ($parent,newNode, oldNode, index = 0) => {
   if (!oldNode) {
     $parent.appendChild(
       createElement(newNode)
