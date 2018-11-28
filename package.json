@@ -1,0 +1,18 @@
+{
+  "name": "vd",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "parcel ./demo/index.html --no-cache"
+  },
+  "keywords": [],
+  "author": "John Martin R. Disuanco",
+  "license": "ISC",
+  "devDependencies": {
+    "@babel/core": "^7.1.6",
+    "babel-core": "^6.26.3",
+    "babel-plugin-transform-jsx": "^2.0.0",
+    "falconjsx": "./falconjsx"
+  }
+}
