@@ -114,6 +114,7 @@ let patch = ($parent,newNode, oldNode, index = 0) => {
       createElement(newNode),
       $parent.childNodes[index]
     )
+    console.log(newNode)
   } else if (newNode.type) {
     updateAttrs(
         $parent.childNodes[index],

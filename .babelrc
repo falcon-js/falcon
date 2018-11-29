@@ -1,5 +1,7 @@
-{   
-    "plugins": [["transform-jsx", { "module": "falconjsx", "useVariables":true }]]
+{
+    "plugins": [
+      ["transform-react-jsx", {
+        "pragma": "h"
+      }]
+    ]
   }
-  
-  
