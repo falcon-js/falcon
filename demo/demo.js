@@ -16,7 +16,7 @@ let onClick = () =>{
 
 let style = {
     color: 'Blue',
-    fontSize: '11px'
+    fontSize: '13px'
 }
 let bare = h('div',{id:'Bar' , class:'red dark'},
     h('p',null,'hello!'),
@@ -63,22 +63,3 @@ const HelloMessage = ({name}) =>
   <div id="hello">
     {name}
   </div>
-
-
-  let App =  (<div id="app">
-              <Sample Val={''}/>
-              <Jsx/>
-            </div>)
-            
-
-
-let render = (dom, element) => {
-  let res = patch(dom,element, oldnode())
-  console.log(res)
-}
-
-render(dom, Jsx)
-
-// setInterval(()=>{
-//   console.log(oldnode())
-// },3000)

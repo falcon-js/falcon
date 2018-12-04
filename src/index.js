@@ -115,6 +115,7 @@ let patch = ($parent,newNode, oldNode, index = 0) => {
     $parent.replaceChild(
       createElement(newNode),
       $parent.childNodes[index]
+<<<<<<< HEAD
     )  
     } else if (JSON.stringify(newNode.props) !=JSON.stringify(oldNode.props)) {
         $parent.replaceChild(
@@ -124,6 +125,10 @@ let patch = ($parent,newNode, oldNode, index = 0) => {
       }
     
     else if (newNode.type) {
+=======
+    )
+  } else if (newNode.type) {
+>>>>>>> b1e8676d4831815abb59bc98e67a6f6a52026c0e
     updateAttrs(
         $parent.childNodes[index],
         newNode.props,

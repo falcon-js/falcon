@@ -1,27 +1,30 @@
 {
   "name": "falcon",
   "version": "0.2.0",
-  "description": "",
+  "description": "Fast Frontend Framework",
   "main": "index.js",
   "scripts": {
     "start": "parcel ./demo/index.html --port 9999 --open --no-cache --out-dir ./tmp",
     "dev": "parcel ./demo/scratch.html --port 3000 --open --no-cache --out-dir ./tmp",
     "build": "rm -rf dist && parcel build ./src/index.js"
   },
-  "keywords": [],
+  "keywords": ["frontend", "virtual dom", "vdom", "falcon", "front end"],
   "author": "John Martin R. Disuanco",
-  "license": "ISC",
+  "license": "MIT",
   "devDependencies": {
     "@babel/core": "^7.1.6",
-    "babel-core": "^6.26.3",
-    "babel-plugin-transform-jsx": "^2.0.0",
+    "babel-plugin-transform-react-jsx": "^6.24.1",
     "falconjsx": "file:devtools/falconjsx"
   },
   "dependencies": {
+<<<<<<< HEAD
     "babel-plugin-transform-react-jsx": "^6.24.1",
     "flyd": "^0.2.8",
     "picodom": "^3.0.0",
     "snabbdom": "^0.7.2",
     "superfine": "^6.0.1"
+=======
+    "flyd": "^0.2.8"
+>>>>>>> b1e8676d4831815abb59bc98e67a6f6a52026c0e
   }
 }
