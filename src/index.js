@@ -1,5 +1,5 @@
 let h = (type, props, ...children) => {
-     return { type, props, children }
+     return { type, props: props || {}, children }
 }
 
 
@@ -58,11 +58,13 @@ let setAttrs= ($el, prop) => {
     }
 }
 
-let remAttr= ($el, name, value) => {
+let removeAttr= ($el, name, value) => {
     if( name.startsWith("on") ){
         removeEventListener($el,name ,value)
      }else if (name =='style'){
          $el.removeAttribute(name,getStyle(value))
+     }else if (typeof value === 'boolean') {
+      removeBooleanProp($target, name)
      }else{
          $el.removeAttribute(name, value)
      }
@@ -113,9 +115,15 @@ let patch = ($parent,newNode, oldNode, index = 0) => {
     $parent.replaceChild(
       createElement(newNode),
       $parent.childNodes[index]
-    )
-    console.log(newNode)
-  } else if (newNode.type) {
+    )  
+    } else if (JSON.stringify(newNode.props) !=JSON.stringify(oldNode.props)) {
+        $parent.replaceChild(
+          createElement(newNode),
+          $parent.childNodes[index]
+        ) 
+      }
+    
+    else if (newNode.type) {
     updateAttrs(
         $parent.childNodes[index],
         newNode.props,
@@ -136,5 +144,6 @@ let patch = ($parent,newNode, oldNode, index = 0) => {
 
 module.exports = {
   h: h,
-  patch: patch
+  patch: patch,
+  diff: diff
 }
