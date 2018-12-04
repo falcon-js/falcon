@@ -16,7 +16,6 @@ let update = (root, newDom)=>{
   }
 }
 
-
 let Render = stream()
 map( (x)=>{
   update(root, x)
@@ -27,17 +26,18 @@ let init = {
 }
 
 let Model= stream()
+map ( (m)=>{ Render(View(m))},Model)
 
 
-Model(init)
+
 
 
 // Sample  Implementation
 
 let root = document.getElementById('root')
 
-let DisplayPanel = (props) =>(
-  <div style="color:red">{props.name}</div>
+let DisplayPanel =(
+  <div style="color:red"> </div>
 )
 
 let InputArea = (props) =>{
@@ -48,37 +48,19 @@ let InputArea = (props) =>{
 
 }
   
-let View = (props) => {
-  console.log('triggered')
- let model =  Model()
- console.log(model)
+let View = (model) => {
+
   return(
     <div>
-      <DisplayPanel name={model.name}/>
+      
       <div>Input here</div>
       <InputArea name={model.name} />
+      <DisplayPanel>{model.name}</DisplayPanel>
     </div>
   )
 }
-
-let a = (<ul>
-    <li>a</li>
-    <li>b</li>
-    <li>3</li>
-  </ul>)
-
-let b = (<ul>
-    <li>a</li>
-    <li>b</li>
-    <li>c</li>
-  </ul>)
-//Render(<View name={'John'} />)
-
-//Render(<View name={'Martin'}/>)
+Render(View(init))
+//Model(init)
+//Part of system
 
 
-
-map ( (m)=>{
-  console.log('auto rendering')  
-  Render(<View name={m.name}/>)
-},Model)

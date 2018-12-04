@@ -17,14 +17,6 @@
     "falconjsx": "file:devtools/falconjsx"
   },
   "dependencies": {
-<<<<<<< HEAD
-    "babel-plugin-transform-react-jsx": "^6.24.1",
-    "flyd": "^0.2.8",
-    "picodom": "^3.0.0",
-    "snabbdom": "^0.7.2",
-    "superfine": "^6.0.1"
-=======
     "flyd": "^0.2.8"
->>>>>>> b1e8676d4831815abb59bc98e67a6f6a52026c0e
   }
 }
