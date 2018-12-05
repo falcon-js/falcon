@@ -1,14 +1,52 @@
+import {stream, map} from 'flyd'
+
 let h = (type, props, ...children) => {
      return { type, props: props || {}, children }
 }
 
+let vdom
+let Root
+let App
+let Init =(dom, app) =>{
+  Root = dom
+  App = app
+}
+
+let update = (Root, newDom)=>{
+  if(vdom == undefined){
+    vdom = newDom
+    patch(Root, newDom)
+  }
+  if(newDom != vdom){
+    patch(Root, newDom, vdom)
+    vdom = newDom
+  }
+}
+
+let Model = stream()
+
+let Render = stream()
+map( (x)=>{
+  update(Root, x)
+}, Render)
+
+let AutoRender = (option = true) => {
+  if (option === true) map ( (m)=>{ 
+    Render(App())
+  }, Model)
+}
+
 
 let createElement = (node) => {
-  if(typeof node.type === 'object') {
-    node = node.type
+  if(node.type != undefined){
+    if(typeof node.type === 'object') {
+      node = node.type
+    }
   }
+  
   if (typeof node === 'string') {
-    return document.createTextNode(node)
+     return document.createTextNode(node)
+    //return document.innerText = node
   }
  if (typeof node.type =='function'){
    node = node.type(node.props)
@@ -71,10 +109,9 @@ let removeAttr= ($el, name, value) => {
 }
 
 let setAttr= ($el, name, value) => {
+  console.log("SetAttr")
     if( name.startsWith("on") ){
         addEventListener($el,name ,value)
-     }else if (name =='style'){
-         $el.setAttribute(name,getStyle(value))
      }else{
          $el.setAttribute(name, value)
      }
@@ -102,6 +139,7 @@ let updateAttrs = ($target, newProps, oldProps = {}) => {
     });
   }
 
+  
 let patch = ($parent,newNode, oldNode, index = 0) => {
   if (!oldNode) {
     $parent.appendChild(
@@ -116,13 +154,6 @@ let patch = ($parent,newNode, oldNode, index = 0) => {
       createElement(newNode),
       $parent.childNodes[index]
     )
-    // } else if (JSON.stringify(newNode.props) !=JSON.stringify(oldNode.props)) {
-    //   if(typeof newNode.type === 'function'){
-    //      $parent.replaceChild(
-    //       createElement(newNode),
-    //       $parent.childNodes[index]
-    //     )
-    //   } 
     }else if (newNode.type) {
     updateAttrs(
         $parent.childNodes[index],
@@ -145,5 +176,9 @@ let patch = ($parent,newNode, oldNode, index = 0) => {
 module.exports = {
   h: h,
   patch: patch,
-  diff: diff
+  diff: diff,
+  Init : Init,
+  Render: Render,
+  Model: Model,
+  AutoRender: AutoRender
 }
