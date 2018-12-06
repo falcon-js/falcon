@@ -18,8 +18,10 @@ let update = (Root, newDom)=>{
     patch(Root, newDom)
   }
   if(newDom != vdom){
+    console.time('Update')
     patch(Root, newDom, vdom)
     vdom = newDom
+    console.timeEnd('Update')
   }
 }
 
@@ -27,11 +29,13 @@ let Model = stream()
 
 let Render = stream()
 map( (x)=>{
+  console.time('Render')
   update(Root, x)
+  console.timeEnd('Render')
 }, Render)
 
 let AutoRender = (option = true) => {
-  if (option === true) map ( (m)=>{ 
+  if (option === true) map ( (m)=>{
     Render(App())
   }, Model)
 }
@@ -109,7 +113,6 @@ let removeAttr= ($el, name, value) => {
 }
 
 let setAttr= ($el, name, value) => {
-  console.log("SetAttr")
     if( name.startsWith("on") ){
         addEventListener($el,name ,value)
      }else{
@@ -144,7 +147,8 @@ let patch = ($parent,newNode, oldNode, index = 0) => {
   if (!oldNode) {
     $parent.appendChild(
       createElement(newNode)
-    );
+    )
+    return newNode
   } else if (!newNode) {
     $parent.removeChild(
       $parent.childNodes[index]
@@ -154,6 +158,7 @@ let patch = ($parent,newNode, oldNode, index = 0) => {
       createElement(newNode),
       $parent.childNodes[index]
     )
+    return newNode
     }else if (newNode.type) {
     updateAttrs(
         $parent.childNodes[index],
@@ -168,7 +173,8 @@ let patch = ($parent,newNode, oldNode, index = 0) => {
         newNode.children[i],
         oldNode.children[i],
         i
-      );
+      )
+      return newNode
     }
   }
 }
