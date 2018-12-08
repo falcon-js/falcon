@@ -260,25 +260,7 @@ semver@^5.4.1:
   version "5.6.0"
   resolved "https://registry.yarnpkg.com/semver/-/semver-5.6.0.tgz#7e74256fbaa49c75aa7c7a205cc22799cac80004"
 
-<<<<<<< HEAD
-slash@^1.0.0:
-  version "1.0.0"
-  resolved "https://registry.yarnpkg.com/slash/-/slash-1.0.0.tgz#c41f2f6c39fc16d1cd17ad4b5d896114ae470d55"
-
-snabbdom@^0.7.2:
-  version "0.7.2"
-  resolved "https://registry.yarnpkg.com/snabbdom/-/snabbdom-0.7.2.tgz#e9d3930e6374ef8766706ccee4c6ed7b331afa64"
-
-source-map-support@^0.4.15:
-  version "0.4.18"
-  resolved "https://registry.yarnpkg.com/source-map-support/-/source-map-support-0.4.18.tgz#0286a6de8be42641338594e97ccea75f0a2c585f"
-  dependencies:
-    source-map "^0.5.6"
-
-source-map@^0.5.0, source-map@^0.5.6, source-map@^0.5.7:
-=======
 source-map@^0.5.0:
->>>>>>> b1e8676d4831815abb59bc98e67a6f6a52026c0e
   version "0.5.7"
   resolved "https://registry.yarnpkg.com/source-map/-/source-map-0.5.7.tgz#8a039d2d1021d22d1ea14c80d8ea468ba2ef3fcc"
 

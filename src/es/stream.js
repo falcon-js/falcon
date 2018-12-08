@@ -17,4 +17,20 @@ let stream = () =>  {
   return createdStream
 };
 
-module.exports = stream
+let scan = (accumulator, initial, sourceStream) => {
+  let newStream = stream(initial)
+  let accumulated = initial
+
+  sourceStream.map(function(value) {
+    accumulated = accumulator(accumulated, value)
+    newStream(accumulated)
+  })
+
+  return newStream
+};
+
+
+module.exports = {
+  stream: stream(),
+  scan: scan
+}

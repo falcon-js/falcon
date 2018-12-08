@@ -1,6 +1,15 @@
 import {stream, map} from 'flyd'
 
 let h = (type, props, ...children) => {
+    if(typeof children[0] ==='string'){
+      //let children =children[0].toString()
+      // let children = ''
+      console.log(typeof children[0])
+      // children.map((x)=>{
+      //   children = children+' '+x
+      // })
+    }
+
      return { type, props: props || {}, children }
 }
 
