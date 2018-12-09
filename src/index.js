@@ -1,67 +1,11 @@
-import {stream, map} from 'flyd'
-<<<<<<< HEAD
-import { h, patch } from 'superfine'
-// let h = (type, props, ...children) => {
-//      return { type, props: props || {}, children }
-// }
-=======
-
 let h = (type, props, ...children) => {
-    if(typeof children[0] ==='string'){
-      //let children =children[0].toString()
-      // let children = ''
-      console.log(typeof children[0])
-      // children.map((x)=>{
-      //   children = children+' '+x
-      // })
+    if(children[0].children === undefined){
+      console.log('no sub children')
+    console.log(typeof children[0])
+     children[0] = children.join(' ')
     }
-
      return { type, props: props || {}, children }
 }
->>>>>>> b208a5c2b80330149586b079d6a80deffc0a5180
-
-let vdom
-let Root
-let App
-let Init =(dom, app) =>{
-  Root = dom
-  App = app
-}
-
-let update = (Root, newDom)=>{
-  if(vdom == undefined){
-    vdom = newDom
-    patch(Root, newDom)
-  }
-  if(newDom != vdom){
-    console.time('Update')
-    patch(Root, newDom, vdom)
-    vdom = newDom
-    console.timeEnd('Update')
-  }
-}
-
-let Model = stream()
-
-let Render = stream()
-map( (x)=>{
-<<<<<<< HEAD
-  console.log(x)
-  update(Root, x)
-  return
-=======
-  console.time('Render')
-  update(Root, x)
-  console.timeEnd('Render')
->>>>>>> b208a5c2b80330149586b079d6a80deffc0a5180
-}, Render)
-
-let AutoRender = (option = true) => {
-  if (option === true) map ( (m)=>{
-    Render(App())
-  }, Model)
-}
-
 
 let createElement = (node) => {
   if(node.type != undefined){
@@ -82,11 +26,15 @@ let createElement = (node) => {
   if(node.props != undefined || node.props != null){
     Object.entries(node.props).map( (p) => {setAttrs($el, p)})
   }
-  node.children
-    .map(createElement)
-    .forEach($el.appendChild.bind($el))
-  return $el;
-}
+  if(node.children){
+    node.children
+        .map(createElement)
+        .forEach($el.appendChild.bind($el))
+  }
+      
+      return $el;
+  }
+
 
 let objecttoInlineStyle = (o) =>{
     let inline =''
@@ -164,40 +112,6 @@ let updateAttrs = ($target, newProps, oldProps = {}) => {
   }
 
   
-<<<<<<< HEAD
-// let patch = ($parent,newNode, oldNode, index = 0) => {
-//   if (!oldNode) {
-//     $parent.appendChild(
-//       createElement(newNode)
-//     );
-//   } else if (!newNode) {
-//     $parent.removeChild(
-//       $parent.childNodes[index]
-//     );
-//   } else if (diff(newNode, oldNode)) {
-//     $parent.replaceChild(
-//       createElement(newNode),
-//       $parent.childNodes[index]
-//     )
-//     }else if (newNode.type) {
-//     updateAttrs(
-//         $parent.childNodes[index],
-//         newNode.props,
-//         oldNode.props
-//       )
-//     const newLength = newNode.children.length;
-//     const oldLength = oldNode.children.length;
-//     for (let i = 0; i < newLength || i < oldLength; i++) {
-//       patch(
-//         $parent.childNodes[index],
-//         newNode.children[i],
-//         oldNode.children[i],
-//         i
-//       );
-//     }
-//   }
-// }
-=======
 let patch = ($parent,newNode, oldNode, index = 0) => {
   if (!oldNode) {
     $parent.appendChild(
@@ -233,14 +147,9 @@ let patch = ($parent,newNode, oldNode, index = 0) => {
     }
   }
 }
->>>>>>> b208a5c2b80330149586b079d6a80deffc0a5180
 
 module.exports = {
   h: h,
   patch: patch,
-  diff: diff,
-  Init : Init,
-  Render: Render,
-  Model: Model,
-  AutoRender: AutoRender
+  diff: diff
 }
