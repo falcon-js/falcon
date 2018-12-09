@@ -8,7 +8,13 @@
     "dev": "parcel ./demo/scratch.html --port 3000 --open --no-cache --out-dir ./tmp",
     "build": "rm -rf dist && parcel build ./src/index.js"
   },
-  "keywords": ["frontend", "virtual dom", "vdom", "falcon", "front end"],
+  "keywords": [
+    "frontend",
+    "virtual dom",
+    "vdom",
+    "falcon",
+    "front end"
+  ],
   "author": "John Martin R. Disuanco",
   "license": "MIT",
   "devDependencies": {
@@ -17,6 +23,8 @@
     "falconjsx": "file:devtools/falconjsx"
   },
   "dependencies": {
-    "flyd": "^0.2.8"
+    "flyd": "^0.2.8",
+    "picodom": "^3.0.0",
+    "superfine": "^6.0.1"
   }
 }

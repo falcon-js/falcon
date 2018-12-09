@@ -1,8 +1,8 @@
 import {stream, map} from 'flyd'
-
-let h = (type, props, ...children) => {
-     return { type, props: props || {}, children }
-}
+import { h, patch } from 'superfine'
+// let h = (type, props, ...children) => {
+//      return { type, props: props || {}, children }
+// }
 
 let vdom
 let Root
@@ -27,7 +27,9 @@ let Model = stream()
 
 let Render = stream()
 map( (x)=>{
+  console.log(x)
   update(Root, x)
+  return
 }, Render)
 
 let AutoRender = (option = true) => {
@@ -45,8 +47,7 @@ let createElement = (node) => {
   }
   
   if (typeof node === 'string') {
-     return document.createTextNode(node)
-    //return document.innerText = node
+     return document.createTextNode(node.toString())
   }
  if (typeof node.type =='function'){
    node = node.type(node.props)
@@ -109,7 +110,6 @@ let removeAttr= ($el, name, value) => {
 }
 
 let setAttr= ($el, name, value) => {
-  console.log("SetAttr")
     if( name.startsWith("on") ){
         addEventListener($el,name ,value)
      }else{
@@ -140,38 +140,38 @@ let updateAttrs = ($target, newProps, oldProps = {}) => {
   }
 
   
-let patch = ($parent,newNode, oldNode, index = 0) => {
-  if (!oldNode) {
-    $parent.appendChild(
-      createElement(newNode)
-    );
-  } else if (!newNode) {
-    $parent.removeChild(
-      $parent.childNodes[index]
-    );
-  } else if (diff(newNode, oldNode)) {
-    $parent.replaceChild(
-      createElement(newNode),
-      $parent.childNodes[index]
-    )
-    }else if (newNode.type) {
-    updateAttrs(
-        $parent.childNodes[index],
-        newNode.props,
-        oldNode.props
-      )
-    const newLength = newNode.children.length;
-    const oldLength = oldNode.children.length;
-    for (let i = 0; i < newLength || i < oldLength; i++) {
-      patch(
-        $parent.childNodes[index],
-        newNode.children[i],
-        oldNode.children[i],
-        i
-      );
-    }
-  }
-}
+// let patch = ($parent,newNode, oldNode, index = 0) => {
+//   if (!oldNode) {
+//     $parent.appendChild(
+//       createElement(newNode)
+//     );
+//   } else if (!newNode) {
+//     $parent.removeChild(
+//       $parent.childNodes[index]
+//     );
+//   } else if (diff(newNode, oldNode)) {
+//     $parent.replaceChild(
+//       createElement(newNode),
+//       $parent.childNodes[index]
+//     )
+//     }else if (newNode.type) {
+//     updateAttrs(
+//         $parent.childNodes[index],
+//         newNode.props,
+//         oldNode.props
+//       )
+//     const newLength = newNode.children.length;
+//     const oldLength = oldNode.children.length;
+//     for (let i = 0; i < newLength || i < oldLength; i++) {
+//       patch(
+//         $parent.childNodes[index],
+//         newNode.children[i],
+//         oldNode.children[i],
+//         i
+//       );
+//     }
+//   }
+// }
 
 module.exports = {
   h: h,
