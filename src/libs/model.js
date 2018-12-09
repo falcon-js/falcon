@@ -1,5 +1,4 @@
 let Observable = (dataObj) => {
-
     let signals = {}
     
     let Dep = {
@@ -30,8 +29,11 @@ let Observable = (dataObj) => {
      */
     let observe = (property, cb) => {
         if(!signals[property]) signals[property] = []
-        signals[property].push(cb)
-    
+        signals[property].push(cb)  
+    }
+
+    let autorender = ()=>{
+        console.log('rerender')
     }
     
     /**
@@ -56,6 +58,8 @@ let Observable = (dataObj) => {
                 deps = Dep.getValidDeps(deps, key)
                 Dep.notifyDeps(deps, key)
                 notify(key)
+                autorender()
+                
             }
         })
     }
@@ -74,7 +78,6 @@ let Observable = (dataObj) => {
                 }      
             }
         }
-    
     }
     
     let notify = (signal) => {
@@ -132,34 +135,6 @@ let Observable = (dataObj) => {
     
     }
     
-
-
  module.exports = {
         Observable: Observable
     }
-    
-    // let State = {
-    //     data: {
-    //         fName: 'John',
-    //         lName: 'Martin',
-    //         age:25,
-    //         fullName () {
-    //                 return this.fName + ' ' + this.lName
-    //             },
-    //         old () {
-    //             let oldornot='Young'
-    //             if(this.age > 50){
-    //                 oldornot = 'old'
-    //             }
-    //             return oldornot
-    //         }
-    //     }
-    // }
-    // let App = new Observable(State)
-    
-    // // App.observe('fName', () =>{console.log('new',App.state.fullName)} )
-    // // App.observe('lName', () =>{console.log('new',App.state.fullName)} )
-    // App.state.fName = 'John Martin'
-    // App.state.lName = 'Disuanco'
-    // window.Update = App
-    

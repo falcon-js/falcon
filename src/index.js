@@ -1,9 +1,12 @@
 let h = (type, props, ...children) => {
-    if(children[0].children === undefined){
-      console.log('no sub children')
-    console.log(typeof children[0])
-     children[0] = children.join(' ')
-    }
+    // if(children[0] && children[0].children === undefined){
+    //   if(!children[0].hasOwnProperty("type")){
+    //     let x  = children.join(' ')
+    //    x.includes('[object Object]') ? null : children[0] = x
+    //     //children[0] = children.join(' ')
+    //   }
+    //}
+    console.log(children)
      return { type, props: props || {}, children }
 }
 
@@ -26,12 +29,13 @@ let createElement = (node) => {
   if(node.props != undefined || node.props != null){
     Object.entries(node.props).map( (p) => {setAttrs($el, p)})
   }
+ 
   if(node.children){
     node.children
         .map(createElement)
-        .forEach($el.appendChild.bind($el))
+        .forEach($el.appendChild.bind($el))      
   }
-      
+    
       return $el;
   }
 
@@ -123,6 +127,7 @@ let patch = ($parent,newNode, oldNode, index = 0) => {
       $parent.childNodes[index]
     );
   } else if (diff(newNode, oldNode)) {
+    console.log($parent)
     $parent.replaceChild(
       createElement(newNode),
       $parent.childNodes[index]
@@ -148,8 +153,20 @@ let patch = ($parent,newNode, oldNode, index = 0) => {
   }
 }
 
+
+let Render = (view, container, node) => state => {
+  console.log('App!')
+  if(node != undefined){
+    node = patch(container, view(state), node ) 
+  }else{
+    node = patch(container, view(state) )
+  }
+}
+
+
 module.exports = {
   h: h,
   patch: patch,
-  diff: diff
+  diff: diff,
+  Render: Render
 }
