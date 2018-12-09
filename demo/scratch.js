@@ -1,35 +1,24 @@
+<<<<<<< HEAD
 import {patch, h, AutoRender, Render, Init} from '../src'
 
 import {map, stream} from 'flyd'
+=======
+import {patch, h, Model, AutoRender, Render, Init, diff} from '../src'
+import {scan, stream} from 'flyd'
+// import {stream} from '../src/es/stream'
+>>>>>>> b208a5c2b80330149586b079d6a80deffc0a5180
 
-// let vdom // current vdom
-
-//Library
-
-// let update = (root, newDom)=>{
-//   if(vdom == undefined){
-//     vdom = newDom
-//     patch(root, newDom)
-//   }
-//   if(newDom != vdom){
-//     patch(root, newDom, vdom)
-//     vdom = newDom
-//   }
+// let init = {
+//   name: 'John'
 // }
 
-// let Render = stream()
-// map( (x)=>{
-//   update(root, x)
-// }, Render)
-
-let init = {
-  name: 'John'
-}
-
+// let xs = stream()
+// console.log(xs())
 
 //console.log(document.getElementById('root'))
 
 
+<<<<<<< HEAD
 let DisplayPanel = <div style="color:red"></div> 
 
 
@@ -50,17 +39,22 @@ let InputArea = (props) =>{
 //     <input type="range" onchange={(e)=>{Model({name: e.target.value});Render(App()) } }/>
 //   </div>
 // )}
+=======
+// let DisplayPanel =(
+//   <div style="color:red"> </div>
+// )
+>>>>>>> b208a5c2b80330149586b079d6a80deffc0a5180
 
-Init(document.getElementById('root'), App)
-// let Model= stream()
-// map ( (m)=>{ Render(View(m))},Model)
+// let InputArea = (props) =>{
+//   let action  = (e)=> {
+//     Model({name:e.target.value})
+//   }
+//   return (<input value={props.name} onkeyup={action}/>)
+// }
 
-//Model(init)
-// Sample  Implementation
+// let updateRange = (val)=>{
 
-// let root = document.getElementById('root')
-//Root = document.getElementById('root')
-
+<<<<<<< HEAD
 // let View = (model) => {
 
 //   return(
@@ -142,3 +136,61 @@ let x = 1
 setInterval( ()=>{
   Model(x ++)
 },1000)
+=======
+// }
+// let App = ()=> {
+//   let   model = Model() || {}
+//   console.log('going here', model)
+//   return(
+//   <div>
+//     <div>Input here</div>
+//     <InputArea name={''}/>
+//     <input type="range" value= {model.name} onchange={(e)=>{
+//       let val = e.target.value
+//       Model({name: val })}} />
+//     <DisplayPanel>{model.name}</DisplayPanel>
+//   </div>
+// )}
+
+//Init(document.getElementById('root'), App)
+
+// AutoRender(true)
+// //Render(View(init))
+// Model(init)
+// //Part of system
+// Model().name = 'John'
+
+
+let node
+//let count = 0
+
+const view = count =>{
+  console.log(count)
+  let x = count.toString()
+  return(
+    <div>
+      <h1 data={count}>Counter:{count}</h1>
+      <button  onclick={() => render(count = count - 1)} >-</button>
+      <button  onclick={() => render(count = count + 1)} >+</button>
+    </div>
+  )
+}
+
+const app = (view, container, node) => state => {
+  if(node != undefined){
+    console.log('normal', diff(view(state), node))
+    console.log(view(state),node)
+    node = patch(container, view(state), node ) 
+  }else{
+    console.log('init render')
+    node = patch(container, view(state) )
+  }
+  
+}
+
+const render = app(view, document.getElementById('root') )
+
+render(0)
+
+// patch(document.getElementById('root'), view(1) )
+>>>>>>> b208a5c2b80330149586b079d6a80deffc0a5180

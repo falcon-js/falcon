@@ -1,8 +1,24 @@
 import {stream, map} from 'flyd'
+<<<<<<< HEAD
 import { h, patch } from 'superfine'
 // let h = (type, props, ...children) => {
 //      return { type, props: props || {}, children }
 // }
+=======
+
+let h = (type, props, ...children) => {
+    if(typeof children[0] ==='string'){
+      //let children =children[0].toString()
+      // let children = ''
+      console.log(typeof children[0])
+      // children.map((x)=>{
+      //   children = children+' '+x
+      // })
+    }
+
+     return { type, props: props || {}, children }
+}
+>>>>>>> b208a5c2b80330149586b079d6a80deffc0a5180
 
 let vdom
 let Root
@@ -18,8 +34,10 @@ let update = (Root, newDom)=>{
     patch(Root, newDom)
   }
   if(newDom != vdom){
+    console.time('Update')
     patch(Root, newDom, vdom)
     vdom = newDom
+    console.timeEnd('Update')
   }
 }
 
@@ -27,13 +45,19 @@ let Model = stream()
 
 let Render = stream()
 map( (x)=>{
+<<<<<<< HEAD
   console.log(x)
   update(Root, x)
   return
+=======
+  console.time('Render')
+  update(Root, x)
+  console.timeEnd('Render')
+>>>>>>> b208a5c2b80330149586b079d6a80deffc0a5180
 }, Render)
 
 let AutoRender = (option = true) => {
-  if (option === true) map ( (m)=>{ 
+  if (option === true) map ( (m)=>{
     Render(App())
   }, Model)
 }
@@ -140,6 +164,7 @@ let updateAttrs = ($target, newProps, oldProps = {}) => {
   }
 
   
+<<<<<<< HEAD
 // let patch = ($parent,newNode, oldNode, index = 0) => {
 //   if (!oldNode) {
 //     $parent.appendChild(
@@ -172,6 +197,43 @@ let updateAttrs = ($target, newProps, oldProps = {}) => {
 //     }
 //   }
 // }
+=======
+let patch = ($parent,newNode, oldNode, index = 0) => {
+  if (!oldNode) {
+    $parent.appendChild(
+      createElement(newNode)
+    )
+    return newNode
+  } else if (!newNode) {
+    $parent.removeChild(
+      $parent.childNodes[index]
+    );
+  } else if (diff(newNode, oldNode)) {
+    $parent.replaceChild(
+      createElement(newNode),
+      $parent.childNodes[index]
+    )
+    return newNode
+    }else if (newNode.type) {
+    updateAttrs(
+        $parent.childNodes[index],
+        newNode.props,
+        oldNode.props
+      )
+    const newLength = newNode.children.length;
+    const oldLength = oldNode.children.length;
+    for (let i = 0; i < newLength || i < oldLength; i++) {
+      patch(
+        $parent.childNodes[index],
+        newNode.children[i],
+        oldNode.children[i],
+        i
+      )
+      return newNode
+    }
+  }
+}
+>>>>>>> b208a5c2b80330149586b079d6a80deffc0a5180
 
 module.exports = {
   h: h,
