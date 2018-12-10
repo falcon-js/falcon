@@ -6,6 +6,7 @@
   "scripts": {
     "start": "parcel ./demo/index.html --port 9999 --open --no-cache --out-dir ./tmp",
     "dev": "parcel ./demo/scratch.html --port 3000 --open --no-cache --out-dir ./tmp",
+    "falcon-core-dev": "parcel ./dev/index.html --port 9999 --open --no-cache --out-dir ./tmp",
     "build": "rm -rf dist && parcel build ./src/index.js"
   },
   "keywords": [
