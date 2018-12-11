@@ -63,7 +63,8 @@ let Display = () => {
     return(
       <div onupdate={console.log('Display Component has been updated')}>
         <h1>{App.state.fullName}</h1>
-        <span>{App.state.old}</span>
+        <div>{App.state.age}</div>
+        <div>{App.state.old}</div>
       </div>     
     )
 }
