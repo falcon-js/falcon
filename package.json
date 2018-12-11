@@ -21,6 +21,7 @@
     "babel-plugin-transform-react-jsx": "^6.24.1"
   },
   "dependencies": {
-    "superfine": "^6.0.1"
+    "superfine": "^6.0.1",
+    "url-mapper": "^2.0.0"
   }
 }
