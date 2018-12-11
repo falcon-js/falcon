@@ -4,6 +4,8 @@ Virtual Dom based framework. That has all the basics, like state management and 
 
 The aim of this framework is to aid web developers to focus on the front-end development not needing so much of a tweak.
 
+
+
 ## Getting Started
 
 These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See deployment for notes on how to deploy the project on a live system.
@@ -15,7 +17,9 @@ These instructions will get you a copy of the project up and running on your loc
     - ```yarn add @falcon.js/falcon ```
 
 
-### Usage
+
+## Usage
+
 
 ### Stateless
 
@@ -96,8 +100,19 @@ App.observe('lName', () =>{render(App)} )
 App.observe('age', () =>{render(App)} )
 
 ```
-### Prerequisites for FalconJS Web Development
+
+
+## Prerequisites
+
+What things you need to install the software and how to install them
+
+```
+npm i -g parcel-bundler
+```
+
+
 - to use JSX feature
+
 place ```.babelrc``` on your development folder with the contents below
 
 ```
@@ -109,13 +124,7 @@ place ```.babelrc``` on your development folder with the contents below
     ]
 }
 ```
-### Prerequisites for Falcon.js core development
 
-What things you need to install the software and how to install them
-
-```
-npm i -g parcel-bundler
-```
 
 ### Installing 
 
