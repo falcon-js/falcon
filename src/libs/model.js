@@ -1,6 +1,5 @@
 let Observable = (dataObj) => {
     let signals = {}
-    
     let Dep = {
         target: null,
         subs:{},
@@ -133,8 +132,8 @@ let Observable = (dataObj) => {
         notify
     }
     
-    }
+}
     
  module.exports = {
         Observable: Observable
-    }
+}

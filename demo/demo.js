@@ -1,65 +1,61 @@
-import {patch, h} from '../src'
-import {stream} from 'flyd'
+import {h, Render, Observable} from '../src'
 
-let oldnode = stream()
-//let oldnode
-const dom = document.getElementById('root');
-
-let onClick = () =>{
-    let counter = new Date().getSeconds()
-    style= {
-      fontSize: counter
-    }
-    let clickcounter =  <p id="target" class='blue' onclick={onClick} style={style}>Hello Loco!</p>
-    patch(dom,<HelloMessage name={'John!'}/>, Jsx)
+let StateStore = {
+        data: {
+            fName: 'John',
+            lName: 'Doe',
+            age:25,
+            fullName () {
+                    return this.fName + ' ' + this.lName
+                },
+            old () {
+                let oldornot='Young'
+                if(this.age > 50){
+                    oldornot = 'Old'
+                }
+                return oldornot
+            }
+        }
 }
 
-let style = {
-    color: 'Blue',
-    fontSize: '13px'
+let routes = {
+  '/':{
+      component: <div>This is Root</div>,
+      auth: false,
+  }
+} 
+let App = new Observable(StateStore)
+
+let Display = () => {
+    return(
+      <div onupdate={console.log('Display Component has been updated')}>
+        <h1>{App.state.fullName}</h1>
+        <span>{App.state.old}</span>
+      </div>     
+    )
 }
-let bare = h('div',{id:'Bar' , class:'red dark'},
-    h('p',null,'hello!'),
-    h('p',null,'John!')
-)
-
-let bare2 = h('div',{id:'Bar' , class:'red dark'},
-    h('p',null,'hello!'),
-    h('p',null,'Joe!')
-)
-
-let keyup = (e) =>{
-  e.preventDefault()
-  e.target.value = e.target.value
-  console.log(e)
-  let t = document.getElementById('app')
-  patch(dom, Sample({Val: e.target.value}), Sample)
+    
+let Controller = () =>{      
+      return(
+        <div >
+          <input value = {App.state.fName} oninput={(e)=>{App.state.fName = e.target.value }}></input>
+          <input value = {App.state.lName} oninput={(e)=>{App.state.lName = e.target.value }}></input>
+          <input type='range' value={App.state.age}  oninput={(e)=>{App.state.age = e.target.value }} ></input>
+        </div>
+      )
 }
 
-let DisplayPanel = ({Val}) => <p id="target">{Val}</p>
-
-
-let Sample = ({Val}) =>{
-    console.log(Val)
-  return(
-  <div id="SAMPLE">
-      <p id="label">Sample!</p>
-      <DisplayPanel Val={Val}/>
-      <input value={Val} placeholder="your name here" onkeyup={ (e) => {keyup(e)} }></input>
-  </div>
-)}
-
-let Jsx = (
-    <div id="JSX">        
-        <p class='red' onclick={onClick} style={style}>Hello Loco!</p>
-        <p id="target" class='blue' style="color: green; font-size:5" >Hello Loco!</p>
-        <p  class='green' >Hello Loco!</p>
-    </div>
-)
-
-
-
-const HelloMessage = ({name}) =>
-  <div id="hello">
-    {name}
-  </div>
+let View = ()  => {
+      return(
+        <div>
+         <Display/>
+         <Controller/>
+        </div>
+      )
+} 
+    
+const render = Render(View, document.body)
+render(App)
+App.observe('fName', () =>{render(App)} )
+App.observe('lName', () =>{render(App)} )
+App.observe('age', () =>{render(App)} )
