@@ -1,6 +1,6 @@
 {
   "name": "@falconjs.io/falcon",
-  "version": "0.5.2",
+  "version": "0.5.3",
   "description": "Falcon Frontend Framework",
   "main": "./dist/index.js",
   "scripts": {
