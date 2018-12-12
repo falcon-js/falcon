@@ -11,10 +11,10 @@ The aim of this framework is to aid web developers to focus on the front-end dev
 These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See deployment for notes on how to deploy the project on a live system.
 
 - via npm
-   -  ```npm install --save @falcon.js/falcon```
+   -  ```npm install --save @falconjs.io/falcon```
 
 - via yarn
-    - ```yarn add @falcon.js/falcon ```
+    - ```yarn add @falconjs.io/falcon ```
 
 
 
@@ -128,7 +128,7 @@ place ```.babelrc``` on your development folder with the contents below
 
 ### Installing 
 
-clone a copy ```git clone https://github.com/jmdisuanco/falconjs```
+clone a copy ```git clone https://github.com/jmdisuanco/falcon```
 
 
 On the cloned directory type in the commands below to start the the development server 
