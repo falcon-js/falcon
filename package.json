@@ -4,7 +4,7 @@
   "description": "Falcon Frontend Framework",
   "main": "index.js",
   "scripts": {
-    "start": "parcel ./demo/index.html --port 9999 --open --no-cache --out-dir ./tmp",
+    "start": "parcel ./app/index.html --port 9999 --open --no-cache --out-dir ./tmp",
     "build": "rm -rf dist && parcel build ./src/index.js"
   },
   "keywords": [

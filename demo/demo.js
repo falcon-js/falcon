@@ -5,7 +5,7 @@ let StateStore = {
             fName: 'John',
             lName: 'Doe',
             age:25,
-            path : document.location.hash.substring(1),
+            location : '/',
             fullName () {
                     return this.fName + ' ' + this.lName
                 },
@@ -27,10 +27,13 @@ let Display = () => {
         <h1>{App.state.fullName}</h1>
         <div>{App.state.age}</div>
         <div>{App.state.old}</div>
-        <a href="/bar">View</a>
+        <a href="/">Home</a>
+        <a href="/bar">Display only</a>
+        <a href="/blahblah">404</a>
       </div>     
     )
 }
+
  
 let Controller = () =>{      
       return(
@@ -42,57 +45,62 @@ let Controller = () =>{
       )
 }
 
-let View = ()  => {
+let View  = (Component) => {
       return(
         <div>
-         <Display/>
-         <Controller/>
+          <Component/>
         </div>
       )
 } 
-
-let noPageFound = <div><h1>404</h1></div>
+let Home =() => { return(<div><Display/><Controller/></div>)}
+let noPageFound = ()=> {console.log('404');return(<div><h1>404</h1></div>)}
     
 const render = Render(View, document.getElementById('root'))
 
 const routes = {
-  '/': View,
-  '/bar': Display,
+  '/': Home,
+  '/bar': Controller,
   '*': noPageFound
 }
 let router = Router(routes)
-let route = router('/bar')
-if(route){
-  let Component = route.match
-  let props = route.values
-  console.log(route)
-  let routeRender = Render(Component, document.getElementById('root'))
-  routeRender()
-}
 
-App.observe('fName', () =>{render(App)} )
-App.observe('lName', () =>{render(App)} )
-App.observe('age', () =>{render(App)} )
-App.observe('path', () =>{console.log(window.location)} )
+
+let reroute = (loc) =>{
+let route = router(App.state.location)
+ let hm= Router(loc)
+ console.log('loc',loc)
+  if(route){
+    let Component = route.match
+    let props = route.values
+    console.log('reroute')
+    render(Component)
+  }
+}
+ reroute('/bar') 
+App.observe('fName', () =>{render()} )
+App.observe('lName', () =>{render()} )
+App.observe('age', () =>{render()} )
+App.observe('location', ()=>{reroute(App.state.location)})
+
 
 // window.onpopstate = () =>{
 //   console.log('not working')
 //   console.log(document.location.hash.substring(1))
 // }
 
-window.onpopstate = function(event) {
-  router = Router(['/', routes])
-  console.log("location: pop" + document.location + ", state: " + JSON.stringify(event.state));
-};
+// window.onpopstate = function(event) {
+//   router = Router(['/', routes])
+//   console.log("location: pop" + document.location + ", state: " + JSON.stringify(event.state));
+// };
+
 let link = document.querySelectorAll('a')
 for ( var key in link){
   if(typeof link[key] === 'object'){
-    let url = console.log(link[key].attributes.href)
+    let url = link[key].attributes.href.value
     link[key].addEventListener('click', (e)=>{
       e.preventDefault()
-      console.log('clcick')
-      
-      history.pushState({}, "title 1", "?page=1");
+      App.state.location = url
+      history.pushState({}, null, url);
     }) 
   }
   
