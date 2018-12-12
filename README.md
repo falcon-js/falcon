@@ -18,7 +18,7 @@ These instructions will get you a copy of the project up and running on your loc
 - via yarn
     - ```yarn add @falconjs.io/falcon ```
 
-### TLDR;
+### For the  TL;DR people read this portion :P
   You can Clone the boilerplate :)!
   - ```git clone https://github.com/jmdisuanco/falconjs.io-boilerplate.git``` [BOILERPLATE](https://github.com/jmdisuanco/falconjs.io-boilerplate.git)
   - ```npm install```
@@ -110,6 +110,64 @@ App.observe('age', () =>{render(App)} )
 
 ```
 
+### working with Routes
+
+```
+import {h, Render, Observable, Router, Navigate, Utils} from '@falconjs.io/falcon'
+
+//location : window.location.pathname This line make sure FalconJS. will serve the right component base on the initial browser access
+let StateStore = {
+        data: {
+            seconds:'',
+            location : window.location.pathname,
+            routes:{},
+            router(){ return Router(this.routes) },
+            render:null
+        }
+}
+
+let App = new Observable(StateStore)
+
+//COMPONENTS
+let View  = (Component) => {
+      return(
+        <div>
+          <Header/>
+          <Component/>
+        </div>
+      )
+} 
+let Header = () =>{
+  return(<div><a href="/">Home</a> <a href="/1">One</a> <a href="/2">Two</a> <a href="/3">Three</a> <a href="https://falconjs.io"> Will go to external site</a>  <a href="/4">Not Found</a></div>)
+}
+
+
+let Home =() => { return(<div><h1>Home</h1></div>)}
+let noPageFound = ()=> {return(<div><h1>404</h1></div>)}
+let One = () => {return(<div><h1>One!</h1></div>)}     
+let Two = () => {return(<div><h1>Two!</h1></div>)}     
+let Three = () => {return(<div><h1>Three!</h1></div>)}  
+
+//Load Renderer in App state
+App.state.render = Render(View, document.getElementById('root'))
+
+//Load route rules to state
+App.state.routes = {
+  '/': Home,
+  '/1': One,
+  '/2': Two,
+  '/3': Three,
+  '*': noPageFound
+}
+
+//initial navigation
+Navigate(App)
+
+//Utils Helper to transform all <a> Anchor tags that starts with "/" to activate Navigation otherwise it will perform the default method
+Utils.transLink(App)
+App.observe('location', () =>{Navigate(App)} )
+```
+
 
 ## Prerequisites
 
@@ -148,6 +206,7 @@ Running this command will also open up your browser to http://localhost:9999
 ## Built With
 
 * [Superfine](https://github.com/jorgebucaran/superfine) - A minimal view layer for creating declarative web user interfaces.
+* [url-mapper](https://github.com/cerebral/url-mapper) - The main purpose of url-mapper is to match given URL to one of the routes. 
 
 ## Author
 
