@@ -24,7 +24,7 @@ These instructions will get you a copy of the project up and running on your loc
 ### Stateless
 
 ```
-import {h, Render} from '@falcon.js/falcon'
+import {h, Render} from '@falconjs.io/falcon'
 
 const view = count =>
   h("div", {}, [
@@ -41,12 +41,12 @@ render(0)
 ### with State and JSX
 
 ``` 
-import {h, Render, Observable} from '@falcon.js/falcon'
+import {h, Render, Observable} from '@falconjs.io/falcon'
 
 let StateStore = {
         data: {
-            fName: 'John',
-            lName: 'Doe',
+            fName: 'FalconJS',
+            lName: 'Framework',
             age:25,
             fullName () {
                     return this.fName + ' ' + this.lName

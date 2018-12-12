@@ -1,3 +1,7 @@
 .cache
 demo
 app
+test
+package-lock.json
+yarn-error.log
+yarn.lock
