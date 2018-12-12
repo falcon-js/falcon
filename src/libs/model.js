@@ -30,9 +30,9 @@ let Observable = (dataObj) => {
         if(!signals[property]) signals[property] = []
         signals[property].push(cb)  
     }
-
+    //TODO
     let autorender = ()=>{
-        console.log('rerender')
+       // console.log('rerender')
     }
     
     /**

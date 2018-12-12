@@ -1,6 +1,7 @@
 import {patch, h} from 'superfine'
 import {Observable} from './libs/model'
-import {router} from './libs/router'
+import {router, Navigate} from './libs/router'
+import * as Utils from './utils'
 
 const Render = (view, container, node) => state => {
     node = patch(node, view(state), container)
@@ -13,5 +14,7 @@ module.exports = {
     patch: patch,
     Observable: Observable,
     Render: Render,
-    Router: router
+    Router: router,
+    Navigate: Navigate,
+    Utils: Utils
 }
