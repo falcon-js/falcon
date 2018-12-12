@@ -6,7 +6,6 @@
   "scripts": {
     "start": "parcel ./app/index.html --port 9999 --open --no-cache --out-dir ./tmp",
     "build": "rm -rf dist && parcel build ./src/index.js",
-    "publish": "npm publish"
   },
   "keywords": [
     "frontend",
