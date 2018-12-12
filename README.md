@@ -1,9 +1,11 @@
 # Falcon Front-end Web development Framework
 
+
 Virtual Dom based framework. That has all the basics, like state management and routing.
 
 The aim of this framework is to aid web developers to focus on the front-end development not needing so much of a tweak.
 
+![](https://img.shields.io/apm/l/vim-mode.svg?style=popout-square)[![](https://img.shields.io/npm/v/npm.svg?style=flat-square)](https://www.npmjs.com/package/@falconjs.io/falcon)
 
 
 ## Getting Started
@@ -16,6 +18,13 @@ These instructions will get you a copy of the project up and running on your loc
 - via yarn
     - ```yarn add @falconjs.io/falcon ```
 
+### TLDR;
+  You can Clone the boilerplate :)!
+  - ```git clone https://github.com/jmdisuanco/falconjs.io-boilerplate.git``` [BOILERPLATE](https://github.com/jmdisuanco/falconjs.io-boilerplate.git)
+  - ```npm install```
+  - ```npm start```
+  - browser will open up the Boilerplate App
+  - edit the files inside ```src``` folder
 
 
 ## Usage
