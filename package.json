@@ -6,6 +6,7 @@
   "scripts": {
     "start": "parcel ./app/index.html --port 9999 --open --no-cache --out-dir ./tmp",
     "build": "rm -rf dist && parcel build ./src/index.js",
+    "pub": "npm publish && git push origin master && git push origin upstream",
     "testbuild": "parcel ./test/index.html --port 8000 --open --no-cache --out-dir ./tmp/test"
   },
   "keywords": [
@@ -16,6 +17,10 @@
     "front end"
   ],
   "author": "John Martin R. Disuanco",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/falcon-js/falcon"
+  },
   "license": "MIT",
   "devDependencies": {
     "@babel/core": "^7.2.0",

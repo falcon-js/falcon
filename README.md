@@ -1,11 +1,17 @@
 # Falcon Front-end Web development Framework
 
+<img src="https://github.com/falcon-js/falconjs-logos/raw/master/png/FALCONJS-LOGO-992FFF.png" width="300" align="center">
 
-Virtual Dom based framework. That has all the basics, like state management and routing.
+![](https://img.shields.io/apm/l/vim-mode.svg?style=popout-square)
+[![](https://img.shields.io/npm/v/npm.svg?style=flat-square)](https://www.npmjs.com/package/@falconjs.io/falcon)
+
+
+
+
+Functional Progressive Web Application framework. That has all the basics, like state management and routing.
 
 The aim of this framework is to aid web developers to focus on the front-end development not needing so much of a tweak.
 
-![](https://img.shields.io/apm/l/vim-mode.svg?style=popout-square)[![](https://img.shields.io/npm/v/npm.svg?style=flat-square)](https://www.npmjs.com/package/@falconjs.io/falcon)
 
 
 ## Getting Started
@@ -202,6 +208,15 @@ On the cloned directory type in the commands below to start the the development 
     ``` yarn start ``` or ``` npm start ```
 
 Running this command will also open up your browser to http://localhost:9999
+
+### Components for FalconJS
+components will be publish in npm with a prefix of ```falconjs-component``` ex. ```falconjs-component-flexgrid```
+
+- [Flexgrid Component](https://www.npmjs.com/package/falconjs-component-flexgrid)
+
+## Contributions are most welcome
+Please Fork and Send Pull Request for the improvement of this library.
+
 
 ## Built With
 
