@@ -38,7 +38,7 @@ These instructions will get you a copy of the project up and running on your loc
 
 ### Stateless
 
-```
+```js
 import {h, Render} from '@falconjs.io/falcon'
 
 const view = count =>
@@ -55,7 +55,7 @@ render(0)
 
 ### with State and JSX
 
-``` 
+```js
 import {h, Render, Observable} from '@falconjs.io/falcon'
 
 let StateStore = {
@@ -118,7 +118,7 @@ App.observe('age', () =>{render(App)} )
 
 ### working with Routes
 
-```
+```js
 import {h, Render, Observable, Router, Navigate, Utils} from '@falconjs.io/falcon'
 
 //location : window.location.pathname This line make sure FalconJS. will serve the right component base on the initial browser access
